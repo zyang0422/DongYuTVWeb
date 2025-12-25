@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     binding.m = mainModel
 
-    onBackPressedDispatcher.addCallback(object: OnBackPressedCallback(true) {
+    onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
       override fun handleOnBackPressed() {
         if (!channelListDialog.isShowing) {
           if (System.currentTimeMillis() - lastBackTime < 1000) {
@@ -152,7 +152,11 @@ class MainActivity : AppCompatActivity() {
             encodeDefaults = true
             ignoreUnknownKeys = true
           }
-          liveItems.addAll(json.decodeFromString<List<LiveChannelModel>>(liveJsonContent))
+          liveItems.addAll(
+            json.decodeFromString<List<LiveChannelModel>>(liveJsonContent)
+              .onEachIndexed { index, model ->
+                model.num = index + 1
+              })
           mainModel.liveItems = liveItems
         }
       }
@@ -245,7 +249,8 @@ class MainActivity : AppCompatActivity() {
             0,
             AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE
           )
-        } catch (_: SecurityException) {}
+        } catch (_: SecurityException) {
+        }
       }
 
       KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_DPAD_LEFT -> {
@@ -310,7 +315,8 @@ class MainActivity : AppCompatActivity() {
         if (!mainModel.showStatus) {
           mainModel.showStatus = true
         }
-        val number = numberStringBuilder.toString().toIntOrNull() ?: return super.onKeyUp(keyCode, event)
+        val number =
+          numberStringBuilder.toString().toIntOrNull() ?: return super.onKeyUp(keyCode, event)
         mainModel.currentIndex = number - 1
 
         handler.removeCallbacks(numberRunnable)

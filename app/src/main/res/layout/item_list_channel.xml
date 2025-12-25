@@ -11,19 +11,36 @@
 
     </data>
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tv_name"
-        android:textColor="@color/white"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:minWidth="200dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_btn"
-        android:padding="16dp"
-        android:selected="@{m.selected}"
-        android:text="@{m.channelName}"
-        android:textSize="19sp"
-        tools:text="@string/app_name">
+        android:minWidth="200dp"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
-    </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:selected="@{m.selected}"
+            android:text="@{String.valueOf(m.num)}"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            tools:text="1" />
+
+        <TextView
+            android:layout_marginStart="6dp"
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn"
+            android:text="@{m.channelName}"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            tools:text="@string/app_name">
+
+        </TextView>
+
+    </LinearLayout>
 
 </layout>

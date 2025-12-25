@@ -32,10 +32,10 @@ class MainModel : BaseObservable() {
   val currentLiveItem get() =  liveItems.getOrNull(currentIndex) ?: LiveChannelModel()
 
   fun up() {
-    currentIndex--
+    currentIndex++
   }
 
   fun down() {
-    currentIndex++
+    currentIndex--
   }
 }

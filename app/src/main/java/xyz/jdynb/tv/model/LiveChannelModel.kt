@@ -41,6 +41,8 @@ data class LiveChannelModel(
     var isLimitedFree: Boolean = false,
 ): BaseObservable() {
 
+    var num = 0
+
     @Bindable
     var isSelected: Boolean = false
         set(value) {
