@@ -18,6 +18,23 @@
             // 检查当前实例是否包含 livePlayer 属性
             if (instance && instance.getLiveUrlsByVid !== undefined) {
                 console.log('找到包含 livePlayer 属性的实例:', instance);
+                document.addEventListener('keydown', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }, true);
+
+                document.addEventListener('keyup', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }, true);
+
+                document.addEventListener('keypress', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }, true);
                 return instance;
             }
 

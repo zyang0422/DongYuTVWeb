@@ -2,46 +2,44 @@ package xyz.jdynb.tv.fragment
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
-import android.net.http.SslError
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.ConsoleMessage
 import android.webkit.JavascriptInterface
-import android.webkit.PermissionRequest
-import android.webkit.SslErrorHandler
-import android.webkit.WebChromeClient
-import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.tencent.smtt.export.external.interfaces.ConsoleMessage
+import com.tencent.smtt.export.external.interfaces.IX5WebSettings
+import com.tencent.smtt.export.external.interfaces.PermissionRequest
+import com.tencent.smtt.export.external.interfaces.SslError
+import com.tencent.smtt.export.external.interfaces.SslErrorHandler
+import com.tencent.smtt.export.external.interfaces.WebResourceRequest
+import com.tencent.smtt.export.external.interfaces.WebResourceResponse
+import com.tencent.smtt.sdk.WebChromeClient
+import com.tencent.smtt.sdk.WebSettings
+import com.tencent.smtt.sdk.WebView
+import com.tencent.smtt.sdk.WebViewClient
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import xyz.jdynb.tv.MainViewModel
 import xyz.jdynb.tv.R
 import xyz.jdynb.tv.databinding.FragmentLivePlayerBinding
+import xyz.jdynb.tv.enums.JsType
 import xyz.jdynb.tv.event.Playable
 import xyz.jdynb.tv.model.LiveChannelModel
 import xyz.jdynb.tv.model.LivePlayerModel
+import xyz.jdynb.tv.utils.JsManager.execJs
 import xyz.jdynb.tv.utils.setSerializableArguments
 import java.io.ByteArrayInputStream
 
 open class LivePlayerFragment: Fragment(), Playable {
 
   companion object {
-    fun newInstance(currentLiveItem: LiveChannelModel): LivePlayerFragment {
-      return LivePlayerFragment().also {
-        it.setSerializableArguments("channelModel", currentLiveItem)
-      }
-    }
 
     private const val TAG = "LivePlayerFragment"
 
@@ -143,6 +141,10 @@ open class LivePlayerFragment: Fragment(), Playable {
   @SuppressLint("SetJavaScriptEnabled")
   private fun WebView.setupWebSettings() {
     settings.apply {
+
+      // tbs x5 播放视频优化
+      // setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY)
+      setPluginState(WebSettings.PluginState.ON_DEMAND)
 
       isFocusable = false
 

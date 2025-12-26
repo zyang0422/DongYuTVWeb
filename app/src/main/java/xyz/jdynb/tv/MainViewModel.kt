@@ -37,6 +37,9 @@ class MainViewModel : ViewModel() {
    */
   val currentIndex = _currentIndex.asStateFlow()
 
+  /**
+   * 切台之前的频道索引位置
+   */
   private var beforeIndex = currentIndex.value
 
   private var _channelModelList = MutableStateFlow<List<LiveChannelModel>>(emptyList())
@@ -47,8 +50,15 @@ class MainViewModel : ViewModel() {
   val channelModelList = _channelModelList.asStateFlow()
 
   private var _channelGroupModelList = MutableStateFlow<List<LiveChannelGroupModel>>(emptyList())
+
+  /**
+   * 频道分组列表
+   */
   val channelGroupModelList = _channelGroupModelList.asStateFlow()
 
+  /**
+   * 切台输入的数字
+   */
   val numberStringBuilder = StringBuilder()
 
   private val json = Json {
@@ -62,7 +72,6 @@ class MainViewModel : ViewModel() {
   @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
   val currentChannelModel = _currentIndex
     .debounce(400)
-    // .filter { _channelModelList.value.isNotEmpty() && it in 0.._channelModelList.value.size - 1 }
     .onEach {
       if (!isTypingNumber()) {
         // 记录切台之前的频道索引位置
@@ -72,21 +81,8 @@ class MainViewModel : ViewModel() {
     }
     .flatMapLatest {
       if (_channelModelList.value.isEmpty()) {
-        withContext(Dispatchers.IO) {
-          JsManager.init(DongYuTVApplication.context)
-          DongYuTVApplication.context.assets.open("lives_ysp.json").use { stream ->
-            _channelModelList.value =
-              stream.readBytes().toString(StandardCharsets.UTF_8).let { channels ->
-                json.decodeFromString<List<LiveChannelModel>>(channels)
-              }.onEachIndexed { index, model ->
-                model.number = index + 1
-              }
-          }
-          _channelGroupModelList.value =
-            _channelModelList.value.groupBy { model -> model.channelType }.map { group ->
-              LiveChannelGroupModel(group.key, group.value)
-            }
-        }
+        // 如果当前频道列表为空，则初始化频道列表，并初始化 JS 脚本
+        init()
       }
       SPKeyConstants.CURRENT_INDEX.put(it)
       flowOf(channelModelList.value.getOrNull(it) ?: LiveChannelModel())
@@ -104,6 +100,22 @@ class MainViewModel : ViewModel() {
       SharingStarted.Eagerly,
       getInitialChannelModel()
     )
+
+  private suspend fun init() = withContext(Dispatchers.IO) {
+    JsManager.init(DongYuTVApplication.context)
+    DongYuTVApplication.context.assets.open("lives_ysp.json").use { stream ->
+      _channelModelList.value =
+        stream.readBytes().toString(StandardCharsets.UTF_8).let { channels ->
+          json.decodeFromString<List<LiveChannelModel>>(channels)
+        }.onEachIndexed { index, model ->
+          model.number = index + 1
+        }
+    }
+    _channelGroupModelList.value =
+      _channelModelList.value.groupBy { model -> model.channelType }.map { group ->
+        LiveChannelGroupModel(group.key, group.value)
+      }
+  }
 
   private fun getInitialChannelModel(): LiveChannelModel {
     return SPKeyConstants.CURRENT_CHANNEL.get<String?>()?.let {

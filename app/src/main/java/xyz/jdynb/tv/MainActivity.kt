@@ -24,7 +24,6 @@ import xyz.jdynb.tv.fragment.LivePlayerFragment
 import xyz.jdynb.tv.fragment.YspLivePlayerFragment
 import xyz.jdynb.tv.utils.isTv
 
-
 class MainActivity : AppCompatActivity() {
 
   companion object {
@@ -88,17 +87,6 @@ class MainActivity : AppCompatActivity() {
         Log.i(TAG, "currentChannelModel: $it")
       }
     }
-
-    /*val upgradeInfo = WebUpgradeUtil.getMatchUpGradeInfo(this)
-    val upgradeSource = UpgradeDownloadSource(
-      this,
-      upgradeInfo.url,
-      File(
-        applicationContext.filesDir,
-        upgradeInfo.packageName + "/" + upgradeInfo.versionName + ".apk"
-      )
-    )
-    WebViewUpgrade.upgrade(upgradeSource)*/
   }
 
   override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
@@ -110,8 +98,16 @@ class MainActivity : AppCompatActivity() {
     return super.dispatchTouchEvent(ev)
   }
 
-  @SuppressLint("GestureBackNavigation")
-  override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+  /**
+   * 事件分发时就拦截，避免事件被 webview 拦截
+   */
+  override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+    Log.i(TAG, "dispatchKeyEvent: ${event.keyCode}")
+    val keyCode = event.keyCode
+    val action = event.action
+    if (action != KeyEvent.ACTION_DOWN) {
+      return super.dispatchKeyEvent(event)
+    }
     when (keyCode) {
       /**
        * 上
@@ -234,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.appendNumber(num)
       }
     }
-    return super.onKeyUp(keyCode, event)
+    return super.dispatchKeyEvent(event)
   }
 
   private fun getNumForKeyCode(keyCode: Int): String {

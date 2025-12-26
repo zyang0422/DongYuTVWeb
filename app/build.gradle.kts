@@ -27,12 +27,19 @@ android {
   defaultConfig {
     applicationId = "xyz.jdynb.tv"
     minSdk = 23
-    targetSdk = 36
+    //noinspection ExpiredTargetSdkVersion
+    targetSdk = 28
     versionCode = 1
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     signingConfig = signingConfigs.getByName("debug")
+
+    ndk {
+      // 适配 cpu 架构: armeabi-v7a
+      // TBS X5内核对32位支持最好，强制使用32位可以解决大部分初始化失败的问题
+      // abiFilters += listOf("armeabi-v7a")
+    }
   }
 
   buildFeatures {
@@ -82,4 +89,6 @@ dependencies {
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
+  // implementation("com.tencent.tbs:tbssdk:44286")
+  implementation(files("libs/tbs_sdk-44382-202411081743-release.aar"))
 }

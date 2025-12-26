@@ -18,6 +18,7 @@
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".DongYuTVApplication"
@@ -46,6 +47,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data android:name="com.tencent.smtt.multiprocess.NUM_PRIVILEGED_SERVICES" android:value="1" />
+        <service
+            android:name="com.tencent.smtt.services.ChildProcessService$Privileged0"
+            android:exported="false"
+            android:isolatedProcess="false"
+            android:process=":privileged_process0" />
 
     </application>
 

@@ -2,7 +2,7 @@ package xyz.jdynb.tv.utils
 
 import android.content.Context
 import android.util.Log
-import android.webkit.WebView
+import com.tencent.smtt.sdk.WebView
 import xyz.jdynb.tv.enums.JsType
 import java.io.IOException
 import java.nio.charset.StandardCharsets

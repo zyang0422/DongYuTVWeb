@@ -3,7 +3,7 @@ package xyz.jdynb.tv.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.webkit.WebResourceResponse
+import com.tencent.smtt.export.external.interfaces.WebResourceResponse
 import xyz.jdynb.tv.enums.JsType
 import xyz.jdynb.tv.model.LiveChannelModel
 import xyz.jdynb.tv.utils.JsManager.execJs

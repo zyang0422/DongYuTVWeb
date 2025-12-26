@@ -1,2 +1,3 @@
 /build
 proguardMapping.txt
+/src/main/assets/tbs/*.*

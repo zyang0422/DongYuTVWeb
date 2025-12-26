@@ -1,8 +1,6 @@
 package xyz.jdynb.tv.dialog
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
@@ -10,7 +8,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.drake.brv.annotaion.DividerOrientation
 import com.drake.brv.utils.bindingAdapter
 import com.drake.brv.utils.divider
@@ -19,8 +16,6 @@ import com.drake.brv.utils.models
 import com.drake.brv.utils.setup
 import com.drake.engine.base.EngineDialog
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.Runnable
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import xyz.jdynb.tv.MainViewModel
@@ -30,7 +25,6 @@ import xyz.jdynb.tv.databinding.ItemListGroupBinding
 import xyz.jdynb.tv.model.LiveChannelGroupModel
 import xyz.jdynb.tv.model.LiveChannelModel
 import xyz.jdynb.tv.utils.isTv
-import kotlin.math.ceil
 
 class ChannelListDialog(
   private val activity: AppCompatActivity,
@@ -149,7 +143,7 @@ class ChannelListDialog(
           binding.rvChannel.post {
             binding.rvChannel.scrollToPosition(checkedPosition)
             if (window?.currentFocus == null) {
-              binding.rvChannel.getChildAt(checkedPosition).requestFocus()
+              binding.rvChannel.getChildAt(checkedPosition)?.requestFocus()
             }
           }
         }
