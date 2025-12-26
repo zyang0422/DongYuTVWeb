@@ -43,7 +43,7 @@ android {
 
   buildTypes {
     release {
-      isMinifyEnabled = false
+      isMinifyEnabled = true
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
   }
@@ -77,8 +77,8 @@ dependencies {
   implementation("androidx.fragment:fragment:1.8.9")
   // https://mvnrepository.com/artifact/androidx.activity/activity-ktx
   implementation("androidx.activity:activity-ktx:1.12.2")
-  implementation("io.github.jonanorman.android.webviewup:core:0.1.0")
-  implementation("io.github.jonanorman.android.webviewup:download-source:0.1.0")
+  // implementation("io.github.jonanorman.android.webviewup:core:0.1.0")
+  // implementation("io.github.jonanorman.android.webviewup:download-source:0.1.0")
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
