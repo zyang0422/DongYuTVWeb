@@ -58,7 +58,7 @@ class MainViewModel : ViewModel() {
    */
   val channelGroupModelList = _channelGroupModelList.asStateFlow()
 
-  private val _showActions = MutableStateFlow(!isTv(DongYuTVApplication.context))
+  private val _showActions = MutableStateFlow(true)
 
   /**
    * 是否显示操作按钮

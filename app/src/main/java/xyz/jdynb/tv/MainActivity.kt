@@ -87,9 +87,7 @@ class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main)
   }
 
   override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-    if (!isTv(this)) {
-      mainViewModel.showActions()
-    }
+    mainViewModel.showActions()
     return super.dispatchTouchEvent(event)
   }
 
