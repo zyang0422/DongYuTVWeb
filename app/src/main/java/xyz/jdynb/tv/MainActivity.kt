@@ -12,18 +12,33 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.drake.engine.base.EngineActivity
+import com.drake.engine.utils.AppUtils
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.Json
 import xyz.jdynb.tv.databinding.ActivityMainBinding
 import xyz.jdynb.tv.dialog.ChannelListDialog
+import xyz.jdynb.tv.dialog.UpdateDialog
 import xyz.jdynb.tv.fragment.LivePlayerFragment
 import xyz.jdynb.tv.fragment.YspLivePlayerFragment
+import xyz.jdynb.tv.model.UpdateModel
 import xyz.jdynb.tv.utils.WebViewUpgrade
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
+import java.nio.charset.StandardCharsets
 
 class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main) {
 
   companion object {
 
     private const val TAG = "MainActivity"
+
+    private const val CHECK_UPDATE_URL =
+      "https://gitee.com/jdy2002/DongYuTvWeb/raw/master/version.json"
+
   }
 
   private val livePlayerFragment: LivePlayerFragment = YspLivePlayerFragment()
@@ -67,6 +82,38 @@ class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main)
       mainViewModel.currentChannelModel.collect {
         Log.i(TAG, "currentChannelModel: $it")
       }
+    }
+
+    lifecycleScope.launch {
+      checkUpdate()
+    }
+  }
+
+  private suspend fun checkUpdate() {
+    try {
+      val updateModel = withContext(Dispatchers.IO) {
+        val connection: HttpURLConnection =
+          URL(CHECK_UPDATE_URL).openConnection() as HttpURLConnection
+        connection.inputStream.use { inputStream ->
+          val content = inputStream.readBytes().toString(StandardCharsets.UTF_8)
+          Log.i(TAG,"content: $content")
+          val json = Json {
+            ignoreUnknownKeys = true
+            encodeDefaults = true
+          }
+          json.decodeFromString<UpdateModel>(content)
+        }
+      }
+      Log.i(TAG, "updateModel: $updateModel")
+      if (AppUtils.getAppVersionCode() < updateModel.versionCode) {
+        // 发现新版本
+        UpdateDialog(this, updateModel).run {
+          setCancelable(false)
+          setCanceledOnTouchOutside(false)
+          show()
+        }
+      }
+    } catch (_: Exception) {
     }
   }
 

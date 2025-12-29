@@ -56,6 +56,12 @@ class ChannelListDialog(
 
   override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
     closeTime = AUTO_CLOSE_TIME
+    when (keyCode) {
+      KeyEvent.KEYCODE_BACK, KeyEvent.KEYCODE_ESCAPE -> {
+        dismiss()
+        return true
+      }
+    }
     return super.onKeyDown(keyCode, event)
   }
 
