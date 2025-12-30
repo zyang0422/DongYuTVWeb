@@ -28,11 +28,11 @@
       }
     },
     {
-      "id": "hongkong",
+      "id": "common",
       "name": "simple",
       "script": {
         "init": [
-          "https://gitee.com/jdy2002/DongYuTvWeb/raw/master/app/src/main/assets/js/hongkong/play.js"
+          "https://gitee.com/jdy2002/DongYuTvWeb/raw/master/app/src/main/assets/js/common/play.js"
         ],
         "play": [],
         "resume_pause": []
@@ -492,7 +492,7 @@
           "channelName": "香港卫视",
           "tvLogo": "",
           "number": 63,
-          "player": "simple",
+          "player": "common",
           "args": {
             "liveUrl": "https://www.hkstv.tv/webcast/livestream/mutfysrq/playlist.m3u8?hls_ctx=7144stj2"
           }

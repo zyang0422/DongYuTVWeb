@@ -121,6 +121,7 @@ abstract class LivePlayerFragment: Fragment(), Playable {
 
     viewLifecycleOwner.lifecycleScope.launch {
       mainViewModel.currentChannelModel.collectLatest {
+        it ?: return@collectLatest
         // 如果当前在数字切台的话, 就延迟 4 秒后进行切换
         if (mainViewModel.isTypingNumber()) {
           delay(4000L)
@@ -354,6 +355,18 @@ abstract class LivePlayerFragment: Fragment(), Playable {
       "UTF-8",
       emptyByteArrayStream
     )
+  }
+
+  override fun onResume() {
+    super.onResume()
+    webView.onResume()
+    webView.resumeTimers()
+  }
+
+  override fun onPause() {
+    super.onPause()
+    webView.onPause()
+    webView.pauseTimers()
   }
 
   override fun onDestroyView() {

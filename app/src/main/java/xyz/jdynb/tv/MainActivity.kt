@@ -59,7 +59,7 @@ class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main)
     insetsController.hide(WindowInsetsCompat.Type.systemBars())
 
     // 判断cpu型号决定需不需要升级
-    isUpgrade = BuildConfig.DEBUG || !Build.SUPPORTED_ABIS.any {
+    isUpgrade = !Build.SUPPORTED_ABIS.any {
       it.contains("arm64")
     }
 
@@ -98,7 +98,7 @@ class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main)
       mainViewModel.currentFragment.collect { clazz ->
         clazz ?: return@collect
 
-        if (isUpgrade) {
+        if (isUpgrade || BuildConfig.DEBUG) {
           showFragment(clazz)
         } else {
           isUpgrade = true
@@ -124,11 +124,7 @@ class MainActivity : EngineActivity<ActivityMainBinding>(R.layout.activity_main)
         transaction.hide(it)
       }
     }
-    if (target.isAdded) {
-      transaction.show(target)
-    } else {
-      transaction.add(R.id.fragment, target, tag)
-    }
+    transaction.replace(R.id.fragment, target, tag)
     transaction.commitNow()
   }
 

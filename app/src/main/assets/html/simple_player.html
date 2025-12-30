@@ -13,9 +13,34 @@
             width: 100vw;
             height: 100vh;
         }
+
+        #loading {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 99;
+            width: 100vw;
+            height: 100vh;
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
 <video autoplay id="video"></video>
+<div class="loading-overlay" id="loading">
+    加载中...请稍后
+</div>
 </body>
+
+<script>
+    function hideLoading() {
+        const loading = document.getElementById('loading');
+        loading.style.display = 'none';
+    }
+</script>
 </html>

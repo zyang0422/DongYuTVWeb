@@ -24,7 +24,7 @@ class YspLivePlayerFragment : LivePlayerFragment() {
   }
 
   override fun onLoadUrl(url: String?) {
-    webView.loadUrl("${url}?pid=${mainViewModel.currentChannelModel.value.pid}")
+    webView.loadUrl("${url}?pid=${mainViewModel.currentChannelModel.value!!.pid}")
   }
 
   /**
@@ -33,7 +33,7 @@ class YspLivePlayerFragment : LivePlayerFragment() {
    * @param  channel 直播频道
    */
   override fun play(channel: LiveChannelModel) {
-    execJs(JsType.PLAY, "pid" to channel.pid, "vid" to channel.streamId)
+    execJs(JsType.PLAY, "pid" to channel.pid, "streamId" to channel.streamId)
   }
 
   /**

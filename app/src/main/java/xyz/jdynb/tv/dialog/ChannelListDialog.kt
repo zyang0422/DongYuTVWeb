@@ -139,7 +139,7 @@ class ChannelListDialog(
         binding.rvChannel.models = model.channelList.onEach { it.isSelected = false }
         if (mainViewModel.currentChannelType.value == model.channelType) {
           val checkedPosition = model.channelList.indexOfFirst {
-            it.number == mainViewModel.currentChannelModel.value.number
+            it.number == mainViewModel.currentChannelModel.value!!.number
           }
           if (checkedPosition == -1) {
             return@onChecked

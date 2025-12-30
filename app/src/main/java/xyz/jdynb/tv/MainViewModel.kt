@@ -1,5 +1,6 @@
 package xyz.jdynb.tv
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -126,7 +127,7 @@ class MainViewModel : ViewModel() {
     .stateIn(
       viewModelScope,
       SharingStarted.Eagerly,
-      getInitialChannelModel()
+      null
     )
 
   /**
@@ -181,8 +182,9 @@ class MainViewModel : ViewModel() {
 
   @OptIn(ExperimentalCoroutinesApi::class)
   val currentFragment = currentChannelModel
+    .filter { it != null }
     .flatMapConcat {
-      flowOf(getFragmentClassForChannel(it))
+      flowOf(getFragmentClassForChannel(it!!))
     }.stateIn(viewModelScope, SharingStarted.Lazily, null)
 
   init {
