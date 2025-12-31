@@ -7,5 +7,6 @@
     }
     // 通过频道名称取值
     const channelItem = window.channelList_henan.find(item => item.name === '{{channelName}}')
-    playLive(channelItem.streams[0])
+    console.log('video_streams: ' + channelItem.video_streams[0])
+    playLive(channelItem.video_streams[0])
 })();
