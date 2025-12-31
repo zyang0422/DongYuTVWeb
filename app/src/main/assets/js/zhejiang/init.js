@@ -88,7 +88,9 @@ Object.keys(_hashParams).forEach((e => {
 ))
 
 function getZheJiangTVLive(code) {
-    const url = `https://zwebl02.cztv.com/live/${code}1080Pnew.m3u8`
+    const url = `https://zwebl02.cztv.com/live/channel${code}1080Pnew.m3u8`
+    // https://zwebl02.cztv.com/live/channel011080Pnew.m3u8?auth_key=1767161700-00d9b67055ea4014a757f5ebea6d7699-0-7704dba882e613d9de56c14f6ea57f17
+    console.log('url: ' + url + '?auth_key=' + getAuthKey(url))
     playLive(url + '?auth_key=' + getAuthKey(url))
 }
 

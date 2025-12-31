@@ -1,6 +1,7 @@
 package xyz.jdynb.tv
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -290,8 +291,12 @@ class MainViewModel : ViewModel() {
 
     val seekToNumber = numberStringBuilder.toString().toIntOrNull() ?: return
     if (seekToNumber in 1..channelModelList.value.size) {
-      val seekToIndex = seekToNumber - 1
+      val seekToIndex = channelModelList.value.indexOfFirst { it.number == seekToNumber }
       if (seekToIndex == currentIndex.value) {
+        numberStringBuilder.clear()
+        return
+      } else if (seekToIndex == -1) {
+        Toast.makeText(DongYuTVApplication.context, "没有找到该频道", Toast.LENGTH_SHORT).show()
         numberStringBuilder.clear()
         return
       }

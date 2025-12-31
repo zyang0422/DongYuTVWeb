@@ -21,8 +21,6 @@ function getJiangXiLiveUrl(m3u8) {
     })), e[t(410)][t(417)] = CryptoJS.MD5(e[t(414)].t + e.data.stream + s + i).toString(), e[t(410)][t(407)] = s
       // e[t(410)][t(418)] = jl + ", " + Yl;
 
-    return e
-
     fetch("https://cdnauth.jxgdw.com/liveauth/pc", {
       "headers": {
         "accept": "application/json, text/plain, */*",
@@ -51,10 +49,13 @@ function getJiangXiLiveUrl(m3u8) {
       return res.json()
     }).then(res => {
         const playUrl = `https://yun-live.jxtvcn.com.cn/live-jxtv/tv_jxtv1.m3u8?source=pc&t=${res.t}&token=${res.token}&uuid=04206c0b50f5`
+        console.log('playUrl:' + playUrl)
         playLive(playUrl)
     })
 }
 
 const m3u8 = '{{m3u8Name}}'
+
+console.log('m3u8: ' + m3u8)
 
 getJiangXiLiveUrl(m3u8)
