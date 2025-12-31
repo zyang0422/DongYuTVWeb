@@ -2,7 +2,7 @@ function addJsWsQuery(url) {
     // HCPMPKxQNrKAyjzR67JGjswspro6954c5ba
     // jsws4kpro
     const regex = /\/(\w+).m3u8/
-    const id = regex.match(url)[1]
+    const id = url.match(regex)[1]
     const key = 'HCPMPKxQNrKAyjzR67JG' + id // 固定
     const salt = Math.floor(Date.now() / 1e3) + 180
     const txTime = salt.toString(16)
