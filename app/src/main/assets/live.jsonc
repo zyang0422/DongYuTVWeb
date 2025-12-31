@@ -704,7 +704,7 @@
           "channelName": "江苏卫视",
           "number": 88,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/applive/jswspro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/applive/jswspro.m3u8"
           }
         },
         {
@@ -712,7 +712,7 @@
           "channelName": "江苏卫视4K超高清",
           "number": 89,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/4klive/jsws4kpro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/4klive/jsws4kpro.m3u8"
           }
         },
         {
@@ -720,7 +720,7 @@
           "channelName": "江苏城市",
           "number": 90,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/applive/jscspro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/applive/jscspro.m3u8"
           }
         },
         {
@@ -728,7 +728,7 @@
           "channelName": "江苏综艺",
           "number": 91,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/applive/jszypro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/applive/jszypro.m3u8"
           }
         },
         {
@@ -736,7 +736,7 @@
           "channelName": "江苏影视",
           "number": 92,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/applive/jsyspro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/applive/jsyspro.m3u8"
           }
         },
         {
@@ -744,7 +744,7 @@
           "channelName": "江苏新闻",
           "number": 93,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/applive/jsxwpro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/applive/jsxwpro.m3u8"
           }
         },
         {
@@ -752,7 +752,7 @@
           "channelName": "江苏教育",
           "number": 94,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/applive/jsjypro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/applive/jsjypro.m3u8"
           }
         },
         {
@@ -760,7 +760,7 @@
           "channelName": "体育休闲",
           "number": 95,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/applive/jsxxpro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/applive/jsxxpro.m3u8"
           }
         },
         {
@@ -768,7 +768,7 @@
           "channelName": "优漫卡通",
           "number": 96,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/applive/ymktpro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/applive/ymktpro.m3u8"
           }
         },
         {
@@ -776,7 +776,7 @@
           "channelName": "江苏国际",
           "number": 97,
           "args": {
-            "liveUrl": "https://litchi-play-encrypted.jstv.com/applive/jsgjpro.m3u8"
+            "liveUrl": "https://litchi-play-encrypted-site.jstv.com/applive/jsgjpro.m3u8"
           }
         }
       ]

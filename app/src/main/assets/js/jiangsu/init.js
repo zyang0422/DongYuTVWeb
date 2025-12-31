@@ -8,5 +8,8 @@ function addJsWsQuery(url) {
 
 (function() {
     const liveUrl = '{{liveUrl}}'
-    playLive(addJsWsQuery(liveUrl))
+    const url = addJsWsQuery(liveUrl)
+    // https://litchi-play-encrypted-site.jstv.com/applive/jswspro.m3u8
+    console.log('url:' + url)
+    playLive(url)
 })();

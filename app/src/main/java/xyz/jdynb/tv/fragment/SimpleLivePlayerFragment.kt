@@ -155,10 +155,10 @@ class SimpleLivePlayerFragment : LivePlayerFragment() {
     super.onPageFinished(url)
 
     // 调试代码
-    /*requireContext().assets.open("js/zhejiang/init.js").use {
+    /*requireContext().assets.open("js/jiangsu/init.js").use {
       it.readBytes().toString(Charsets.UTF_8)
     }.let {
-     val js = it.replace("{{code}}", "101")
+     val js = it.replace("{{liveUrl}}", "https://litchi-play-encrypted-site.jstv.com/applive/jswspro.m3u8")
       webView.evaluateJavascript(js, null)
     }*/
   }
